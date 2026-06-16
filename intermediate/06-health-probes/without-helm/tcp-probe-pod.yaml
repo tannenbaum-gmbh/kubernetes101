@@ -1,0 +1,21 @@
+# Using TCP socket probe instead of HTTP
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tcp-probe-pod
+spec:
+  containers:
+    - name: redis
+      image: redis:7
+      ports:
+        - containerPort: 6379
+      livenessProbe:
+        tcpSocket:
+          port: 6379
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      readinessProbe:
+        tcpSocket:
+          port: 6379
+        initialDelaySeconds: 3
+        periodSeconds: 5

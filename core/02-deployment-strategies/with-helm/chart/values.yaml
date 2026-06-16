@@ -1,0 +1,17 @@
+replicaCount: 3
+
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+# strategy: RollingUpdate | Recreate
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+
+service:
+  type: ClusterIP
+  port: 80

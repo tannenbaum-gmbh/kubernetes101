@@ -1,0 +1,12 @@
+# PersistentVolumeClaim (PVC): a request for storage by a user/Pod
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: training-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+  storageClassName: manual

@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+persistence:
+  enabled: true
+  storageClass: ""        # Use default StorageClass (dynamic provisioning)
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  mountPath: /usr/share/nginx/html
+
+service:
+  type: ClusterIP
+  port: 80

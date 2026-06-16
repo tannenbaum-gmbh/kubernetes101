@@ -1,0 +1,6 @@
+apiVersion: v2
+name: webapp-strategies
+description: Demonstrates configurable Kubernetes deployment strategies via Helm
+type: application
+version: 0.1.0
+appVersion: "1.25"

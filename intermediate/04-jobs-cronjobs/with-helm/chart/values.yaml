@@ -1,0 +1,21 @@
+job:
+  enabled: true
+  name: batch-job
+  image: busybox
+  tag: "1.36"
+  command: ['sh', '-c', 'echo "Running job at $(date)"; sleep 5; echo "Job done"']
+  backoffLimit: 3
+  completions: 1
+  parallelism: 1
+  ttlSecondsAfterFinished: 120
+
+cronjob:
+  enabled: true
+  name: scheduled-job
+  schedule: "*/10 * * * *"
+  image: busybox
+  tag: "1.36"
+  command: ['sh', '-c', 'echo "Cron run at $(date)"']
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1

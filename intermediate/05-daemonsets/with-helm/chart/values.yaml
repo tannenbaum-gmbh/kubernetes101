@@ -1,0 +1,19 @@
+image:
+  repository: busybox
+  tag: "1.36"
+  pullPolicy: IfNotPresent
+
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+
+nodeSelector: {}
+
+resources:
+  requests:
+    cpu: "50m"
+    memory: "32Mi"
+  limits:
+    cpu: "100m"
+    memory: "64Mi"

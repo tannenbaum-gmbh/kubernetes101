@@ -1,0 +1,17 @@
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+sidecar:
+  enabled: true
+  image: busybox
+  tag: "1.36"
+  command: ['sh', '-c', 'while true; do echo "[$(date)] sidecar alive"; sleep 30; done']
+
+initContainers:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 80

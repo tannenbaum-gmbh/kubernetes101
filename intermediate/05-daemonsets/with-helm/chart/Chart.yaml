@@ -1,0 +1,6 @@
+apiVersion: v2
+name: daemonset-demo
+description: Helm chart demonstrating Kubernetes DaemonSets
+type: application
+version: 0.1.0
+appVersion: "1.0"

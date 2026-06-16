@@ -1,0 +1,18 @@
+{{- if .Values.job.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.job.name }}
+spec:
+  completions: {{ .Values.job.completions }}
+  parallelism: {{ .Values.job.parallelism }}
+  backoffLimit: {{ .Values.job.backoffLimit }}
+  ttlSecondsAfterFinished: {{ .Values.job.ttlSecondsAfterFinished }}
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: job
+          image: "{{ .Values.job.image }}:{{ .Values.job.tag }}"
+          command: {{ .Values.job.command | toJson }}
+{{- end }}

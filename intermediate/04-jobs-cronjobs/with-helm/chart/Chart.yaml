@@ -1,0 +1,6 @@
+apiVersion: v2
+name: jobs-cronjobs
+description: Helm chart demonstrating Kubernetes Jobs and CronJobs
+type: application
+version: 0.1.0
+appVersion: "1.0"

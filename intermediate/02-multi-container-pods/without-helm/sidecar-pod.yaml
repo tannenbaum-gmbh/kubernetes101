@@ -1,0 +1,33 @@
+# Sidecar pattern: a secondary container that augments the main container
+# Here: an nginx serving content that a git-sync sidecar would keep updated
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sidecar-pod
+  labels:
+    app: sidecar-demo
+spec:
+  volumes:
+    - name: shared-data
+      emptyDir: {}
+  initContainers:
+    # Init container runs to completion before any main container starts
+    - name: init-content
+      image: busybox:1.36
+      command: ['sh', '-c', 'echo "<h1>Content from init container</h1>" > /data/index.html']
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+  containers:
+    # Main container: serves web content
+    - name: nginx
+      image: nginx:1.25
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
+    # Sidecar container: logs request counts periodically
+    - name: log-sidecar
+      image: busybox:1.36
+      command: ['sh', '-c', 'while true; do echo "[$(date)] sidecar alive"; sleep 30; done']

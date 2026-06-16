@@ -1,0 +1,22 @@
+# DaemonSet with nodeSelector: only run on nodes with specific label
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: gpu-monitor
+  labels:
+    app: gpu-monitor
+spec:
+  selector:
+    matchLabels:
+      app: gpu-monitor
+  template:
+    metadata:
+      labels:
+        app: gpu-monitor
+    spec:
+      nodeSelector:
+        hardware: gpu      # Only schedule on nodes with this label
+      containers:
+        - name: gpu-monitor
+          image: busybox:1.36
+          command: ['sh', '-c', 'while true; do echo "Monitoring GPU on $(hostname)"; sleep 15; done']

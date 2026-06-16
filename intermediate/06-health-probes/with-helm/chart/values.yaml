@@ -1,0 +1,42 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+probes:
+  startup:
+    enabled: true
+    path: /
+    port: 80
+    failureThreshold: 30
+    periodSeconds: 2
+  liveness:
+    enabled: true
+    path: /
+    port: 80
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 3
+    timeoutSeconds: 2
+  readiness:
+    enabled: true
+    path: /
+    port: 80
+    initialDelaySeconds: 3
+    periodSeconds: 5
+    failureThreshold: 3
+    timeoutSeconds: 1
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "64Mi"
+  limits:
+    cpu: "200m"
+    memory: "128Mi"

@@ -1,0 +1,7 @@
+# Namespaces provide a mechanism for isolating groups of resources within a cluster
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: training
+  labels:
+    environment: training

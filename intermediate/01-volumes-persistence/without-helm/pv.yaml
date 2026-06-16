@@ -1,0 +1,14 @@
+# PersistentVolume (PV): cluster-level storage resource provisioned by an admin
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: training-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /data/training   # hostPath is suitable for single-node minikube only
