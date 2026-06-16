@@ -88,4 +88,3 @@ kubectl logs <pod-name> -c <container-name>   # multi-container
 # k9s
 k9s   # Opens interactive TUI
 ```
-Training for kubernetes core concepts
