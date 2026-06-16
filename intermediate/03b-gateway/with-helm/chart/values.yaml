@@ -1,0 +1,20 @@
+replicaCount: 2
+
+image:
+  repository: hashicorp/http-echo
+  tag: "0.2.3"
+  pullPolicy: IfNotPresent
+
+appText: "Hello from Helm Gateway!"
+
+service:
+  port: 80
+  targetPort: 5678
+
+gateway:
+  # Set to false if a GatewayClass named 'nginx' already exists in the cluster
+  createGatewayClass: true
+  gatewayClassName: nginx
+  host: app.example.local
+  path: /
+  pathType: PathPrefix
