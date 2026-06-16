@@ -1,0 +1,41 @@
+# Pod that consumes ConfigMap values as environment variables and a Secret
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+    - name: app
+      image: nginx:1.25
+      env:
+        # Single key from ConfigMap
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_ENV
+        # Single key from Secret
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_PASSWORD
+      # Mount the full ConfigMap as environment variables
+      envFrom:
+        - configMapRef:
+            name: app-config
+      volumeMounts:
+        - name: nginx-config-volume
+          mountPath: /etc/nginx/conf.d
+  volumes:
+    - name: nginx-config-volume
+      configMap:
+        name: app-config
+        items:
+          - key: nginx.conf
+            path: default.conf

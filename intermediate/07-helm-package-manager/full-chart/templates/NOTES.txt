@@ -1,0 +1,26 @@
+Thank you for installing {{ .Chart.Name }} (version {{ .Chart.Version }})!
+
+Release name: {{ .Release.Name }}
+Namespace:    {{ .Release.Namespace }}
+
+{{- if eq .Values.service.type "LoadBalancer" }}
+  Get the application URL by running:
+    kubectl get service {{ include "full-webapp.fullname" . }} --namespace {{ .Release.Namespace }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+
+{{- else if eq .Values.service.type "NodePort" }}
+  Get the application URL by running:
+    export NODE_PORT=$(kubectl get service {{ include "full-webapp.fullname" . }} --namespace {{ .Release.Namespace }} -o jsonpath='{.spec.ports[0].nodePort}')
+    export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath='{.items[0].status.addresses[0].address}')
+    echo "Application URL: http://$NODE_IP:$NODE_PORT"
+
+{{- else }}
+  The application is available via ClusterIP. Forward the port:
+    kubectl port-forward service/{{ include "full-webapp.fullname" . }} 8080:{{ .Values.service.port }} --namespace {{ .Release.Namespace }}
+    echo "Application URL: http://localhost:8080"
+{{- end }}
+
+{{- if .Values.ingress.enabled }}
+Ingress configured for host: {{ .Values.ingress.host }}
+{{- end }}
+
+Enjoy your Kubernetes training!

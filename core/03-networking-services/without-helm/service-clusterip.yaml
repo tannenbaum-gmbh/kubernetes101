@@ -1,0 +1,13 @@
+# ClusterIP: internal-only service (default type)
+# Accessible only within the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx-backend
+  ports:
+    - port: 80
+      targetPort: 80

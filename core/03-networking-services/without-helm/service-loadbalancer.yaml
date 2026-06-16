@@ -1,0 +1,13 @@
+# LoadBalancer: exposes the Service externally using a cloud provider's load balancer
+# In minikube, use `minikube tunnel` to get an external IP
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-backend
+  ports:
+    - port: 80
+      targetPort: 80

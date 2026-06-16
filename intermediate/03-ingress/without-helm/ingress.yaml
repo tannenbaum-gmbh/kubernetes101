@@ -1,0 +1,28 @@
+# Ingress: HTTP/HTTPS routing rules to internal Services
+# Requires an Ingress Controller (e.g. nginx ingress) to be installed
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: app.example.local
+      http:
+        paths:
+          - path: /v1
+            pathType: Prefix
+            backend:
+              service:
+                name: app-v1-svc
+                port:
+                  number: 80
+          - path: /v2
+            pathType: Prefix
+            backend:
+              service:
+                name: app-v2-svc
+                port:
+                  number: 80

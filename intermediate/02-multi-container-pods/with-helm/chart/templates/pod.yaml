@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-pod
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  {{- if .Values.initContainers.enabled }}
+  initContainers:
+    - name: init-content
+      image: busybox:1.36
+      command: ['sh', '-c', 'echo "<h1>Helm Multi-Container Demo</h1>" > /data/index.html']
+      volumeMounts:
+        - name: shared-data
+          mountPath: /data
+  {{- end }}
+  containers:
+    - name: main
+      image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
+    {{- if .Values.sidecar.enabled }}
+    - name: sidecar
+      image: "{{ .Values.sidecar.image }}:{{ .Values.sidecar.tag }}"
+      command: {{ .Values.sidecar.command | toJson }}
+    {{- end }}
+  volumes:
+    - name: shared-data
+      emptyDir: {}

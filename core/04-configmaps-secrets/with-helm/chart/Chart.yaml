@@ -1,0 +1,6 @@
+apiVersion: v2
+name: webapp-config
+description: Helm chart demonstrating ConfigMaps and Secrets
+type: application
+version: 0.1.0
+appVersion: "1.25"

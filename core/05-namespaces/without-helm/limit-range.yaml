@@ -1,0 +1,18 @@
+# LimitRange: sets default resource limits for containers in a namespace
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: training-limits
+  namespace: training
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: "200m"
+        memory: "128Mi"
+      defaultRequest:
+        cpu: "100m"
+        memory: "64Mi"
+      max:
+        cpu: "1"
+        memory: "512Mi"

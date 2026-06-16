@@ -1,0 +1,15 @@
+apiVersion: v2
+name: full-webapp
+description: |
+  A full-featured Helm chart demonstrating advanced Helm features:
+  helpers, conditionals, loops, NOTES.txt, and more.
+type: application
+version: 1.0.0
+appVersion: "1.25"
+keywords:
+  - nginx
+  - webapp
+  - training
+maintainers:
+  - name: Kubernetes Training Team
+    email: training@example.com

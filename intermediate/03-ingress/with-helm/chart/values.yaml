@@ -1,0 +1,25 @@
+replicaCount: 2
+
+image:
+  repository: hashicorp/http-echo
+  tag: "0.2.3"
+  pullPolicy: IfNotPresent
+
+appText: "Hello from Helm!"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5678
+
+ingress:
+  enabled: true
+  className: nginx
+  host: app.example.local
+  path: /
+  pathType: Prefix
+  tls: []
+  # tls:
+  #   - secretName: app-tls-secret
+  #     hosts:
+  #       - app.example.local

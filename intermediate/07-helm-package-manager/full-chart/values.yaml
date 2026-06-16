@@ -1,0 +1,68 @@
+# Application configuration
+replicaCount: 2
+
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 80
+
+# Ingress configuration
+ingress:
+  enabled: false
+  className: nginx
+  host: chart-example.local
+  path: /
+  pathType: Prefix
+  tls: []
+
+# Resource limits
+resources:
+  requests:
+    cpu: "100m"
+    memory: "64Mi"
+  limits:
+    cpu: "250m"
+    memory: "128Mi"
+
+# Environment variables
+env:
+  APP_ENV: production
+  LOG_LEVEL: info
+
+# Autoscaling
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+# Health probes
+probes:
+  liveness:
+    enabled: true
+    path: /
+    port: 80
+  readiness:
+    enabled: true
+    path: /
+    port: 80
+
+# Pod annotations
+podAnnotations: {}
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity
+affinity: {}

@@ -1,0 +1,24 @@
+# Job: runs a Pod to completion (batch task)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-calculator
+spec:
+  completions: 1         # Number of successful completions required
+  parallelism: 1         # Number of Pods running in parallel
+  backoffLimit: 3        # Number of retries before marking job as failed
+  ttlSecondsAfterFinished: 60  # Auto-delete 60s after completion
+  template:
+    spec:
+      restartPolicy: Never   # Must be Never or OnFailure for Jobs
+      containers:
+        - name: pi
+          image: perl:5.34
+          command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "128Mi"

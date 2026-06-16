@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.25"
+  pullPolicy: IfNotPresent
+
+config:
+  APP_ENV: production
+  APP_PORT: "8080"
+
+# Secrets are stored as plain text in values.yaml for demo purposes only.
+# In production, use Helm Secrets, Vault, or Sealed Secrets.
+secret:
+  DB_USER: admin
+  DB_PASSWORD: s3cr3t!
+
+service:
+  type: ClusterIP
+  port: 80
