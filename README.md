@@ -49,6 +49,7 @@ kubectl get nodes
 | 1 | [Volumes and Persistence](intermediate/01-volumes-persistence) | [without-helm](intermediate/01-volumes-persistence/without-helm) | [with-helm](intermediate/01-volumes-persistence/with-helm) |
 | 2 | [Multi-Container Pods and Init Containers](intermediate/02-multi-container-pods) | [without-helm](intermediate/02-multi-container-pods/without-helm) | [with-helm](intermediate/02-multi-container-pods/with-helm) |
 | 3 | [Ingress](intermediate/03-ingress) | [without-helm](intermediate/03-ingress/without-helm) | [with-helm](intermediate/03-ingress/with-helm) |
+| 3b | [Gateway API](intermediate/03b-gateway) | [without-helm](intermediate/03b-gateway/without-helm) | [with-helm](intermediate/03b-gateway/with-helm) |
 | 4 | [Jobs and CronJobs](intermediate/04-jobs-cronjobs) | [without-helm](intermediate/04-jobs-cronjobs/without-helm) | [with-helm](intermediate/04-jobs-cronjobs/with-helm) |
 | 5 | [DaemonSets](intermediate/05-daemonsets) | [without-helm](intermediate/05-daemonsets/without-helm) | [with-helm](intermediate/05-daemonsets/with-helm) |
 | 6 | [Health Probes](intermediate/06-health-probes) | [without-helm](intermediate/06-health-probes/without-helm) | [with-helm](intermediate/06-health-probes/with-helm) |
